@@ -1,2 +1,2 @@
 # groovy-decompiler
-[](img/d2.png)
+![](./img/d2.png)
