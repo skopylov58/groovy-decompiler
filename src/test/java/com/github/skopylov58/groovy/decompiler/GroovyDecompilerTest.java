@@ -11,6 +11,8 @@ import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.skopylov58.groovy.decompiler.GroovyDecompiler;
 import com.github.skopylov58.groovy.decompiler.GroovyVisitor;
 
+import java.util.Arrays;
+
 public class GroovyDecompilerTest {
 
   
@@ -47,7 +49,20 @@ public class GroovyDecompilerTest {
     assertEquals("storageFacet", site[2]);
     assertEquals("attach", site[3]);
   }
-  
+
+  @Test
+  public void testWrongSite() throws Exception {
+
+    String callSite ="""
+    dspofs;lvk
+    scvklks
+    ds;olk
+    """;
+    String[] site = GroovyDecompiler.loadCallSite(callSite.lines());
+    System.out.println(Arrays.toString(site));
+    assertTrue(site.length == 0);
+  }
+
   @Test
   public void testDecompile() throws Exception {
     String code = """
@@ -55,17 +70,18 @@ public class GroovyDecompilerTest {
   CallSite[] var2 = $getCallSiteArray();
   var2[0].call(repository, var2[1].call(var2[2].callGroovyObjectGetProperty(this)));
       }
-      """;
+  """;
 
     BlockStmt block = StaticJavaParser.parseBlock(code);
 
-//    DotPrinter printer = new DotPrinter(true);
-//     printer.output(block);
-    
-//    YamlPrinter yamlPrinter = new YamlPrinter(true);
-//    System.out.println(yamlPrinter.output(block));
-    
-    GroovyVisitor gv = new GroovyVisitor(GroovyDecompiler.loadCallSite(callSite.lines()));
+/*
+    DotPrinter printer = new DotPrinter(true);
+     printer.output(block);
+    YamlPrinter yamlPrinter = new YamlPrinter(true);
+    System.out.println(yamlPrinter.output(block));
+*/
+
+      GroovyVisitor gv = new GroovyVisitor(GroovyDecompiler.loadCallSite(callSite.lines()));
     block.accept(gv, Integer.valueOf(0));
     
     String decompiled = block.toString();

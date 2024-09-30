@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'eclipse'
+    id 'application'
 }
 
 repositories {
@@ -20,15 +21,29 @@ java {
     }
 }
 
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+compileTestJava {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 tasks.named('test') {
     useJUnit()
 }
 
+application {
+    mainClass = "com.github.skopylov58.groovy.decompiler.http.MyHttpServer"
+}
 jar {
-    manifest {
-        attributes "Main-Class": "com.github.skopylov58.groovy.decompiler.GroovyDecompiler"
-    }
+//    manifest {
+//        attributes "Main-Class": "com.github.skopylov58.groovy.decompiler.http.MyHttpServer"
+//    }
 
+    //Fat jar
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }

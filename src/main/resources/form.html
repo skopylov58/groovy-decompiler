@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Groovy decompiler</title>
+</head>
+<style>
+    body {
+    /* Center the form on the page */
+        text-align: center;
+    }
+</style>
+<body>
+
+<form action="decompile" method="post" >
+    Callsite
+    <br>
+    <textarea name="callsite" cols="100" rows="16" required>__callsite__</textarea>
+    <br>
+    Groovy block code
+    <br>
+    <textarea name="groovy" cols="100" rows="16" required>__groovy__</textarea>
+    <br>
+    <input type="submit" value="Submit">
+    <br>
+    Decompiled code
+    <br>
+    <textarea name="java" cols="100" rows="16" >__java__</textarea>
+</form>
+</body>
+</html>

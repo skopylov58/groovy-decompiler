@@ -51,16 +51,14 @@ public class GroovyDecompiler {
   }
 
   private static void usage() {
-    String usage = """
-Usage: java -jar groovy-decompiler.jar fileName1 filename2
-where:
- -  filename1 - path to the file decompiled by 'javap -c -p' command
- -  filename2 - path to the file decompiled by one of CFR, Procyon or Fernflower decompiler  
-            """;
+    String usage = "Usage: java -jar groovy-decompiler.jar fileName1 filename2\n" +
+                   "where:\n" +
+                   " -  filename1 - path to the file decompiled by 'javap -c -p' command\n" +
+                   " -  filename2 - path to the file decompiled by one of CFR, Procyon or Fernflower decompiler\n";
     System.out.println(usage);
   }
 
-  public static String[] loadCallSite(Stream<String> lines) throws Exception {
+  public static String[] loadCallSite(Stream<String> lines) {
 
     AtomicBoolean ab = new AtomicBoolean(false);
     Consumer<String> latch = s -> {
@@ -79,7 +77,7 @@ where:
         .map(s -> s.split("\\s+")[6])
         .toList();
     
-    return list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
   
   public static String[] loadCallSite(String fileName) throws Exception {
