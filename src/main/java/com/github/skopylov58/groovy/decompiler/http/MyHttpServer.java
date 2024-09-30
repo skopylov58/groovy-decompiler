@@ -39,7 +39,7 @@ public class MyHttpServer {
                 System.out.println(postParam);
 
                 int resCode = 200;
-                String groovyCode = "{" + postParam.get("groovy") + "}"; //Make it block
+                String groovyCode = "{\n" + postParam.get("groovy") + "}\n"; //Make it block
                 try {
                     String decompiled = decompile(postParam.get("callsite"), groovyCode);
                     System.out.println(decompiled);
