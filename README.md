@@ -12,7 +12,8 @@ Build requires Java 17
 # Run decompiler
 `./gradlew run`
 
-By default decompiler run at port 8440
+Decompiler runs at port 8440 by default
+
 
 
 
